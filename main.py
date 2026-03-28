@@ -5,7 +5,7 @@ import time
 
 # Твій ключ (порада: краще зберігати його в змінних середовища для безпеки)
 API_KEY = '0JddtV85CWYfUE56u9oO8q0mGvTl7jlrSp4QNsi3'
-FILE_NAME = 'cars_dataset.csv'
+FILE_NAME = 'data/cars_dataset.csv'
 MAX_REQUESTS = 2000
 
 
