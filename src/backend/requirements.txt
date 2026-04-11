@@ -1,0 +1,9 @@
+streamlit
+requests
+pandas
+numpy
+fastapi
+uvicorn
+catboost
+joblib
+pydantic

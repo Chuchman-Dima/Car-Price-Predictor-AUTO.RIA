@@ -1,0 +1,18 @@
+services:
+  backend:
+    build: ./src/backend
+    container_name: auto_price_backend
+    env_file:
+      - .env
+    ports:
+      - "8080:8000"
+    restart: always
+
+  frontend:
+    build: ./src/frontend
+    container_name: auto_price_frontend
+    ports:
+      - "8501:8501"
+    depends_on:
+      - backend
+    restart: always
