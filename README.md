@@ -121,6 +121,11 @@
 
 -----
 
+<img width="900" height="791" alt="image" src="https://github.com/user-attachments/assets/261a6ab5-4e9c-4759-864e-d2d1ecd3cbfd" />
+<img width="918" height="857" alt="image" src="https://github.com/user-attachments/assets/ab6af608-aa67-42f4-a0d0-74b89d46cb37" />
+
+-----
+
 # Автор
 **Чучман Дмитро**
 
