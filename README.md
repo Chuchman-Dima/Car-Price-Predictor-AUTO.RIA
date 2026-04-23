@@ -121,8 +121,10 @@
 
 -----
 
-<img width="900" height="791" alt="image" src="https://github.com/user-attachments/assets/261a6ab5-4e9c-4759-864e-d2d1ecd3cbfd" />
-<img width="918" height="857" alt="image" src="https://github.com/user-attachments/assets/ab6af608-aa67-42f4-a0d0-74b89d46cb37" />
+<img width="1431" height="823" alt="Знімок екрана 2026-04-23 212709" src="https://github.com/user-attachments/assets/edc24a40-ff06-4983-a569-efebbfc71316" />
+<img width="1459" height="490" alt="Знімок екрана 2026-04-23 212734" src="https://github.com/user-attachments/assets/1aae102a-c29c-436e-9f11-ea22dac4f598" />
+<img width="1425" height="428" alt="Знімок екрана 2026-04-23 212753" src="https://github.com/user-attachments/assets/e248b797-69c3-436a-928c-259dc50c7dad" />
+<img width="1415" height="762" alt="Знімок екрана 2026-04-23 212813" src="https://github.com/user-attachments/assets/22261171-524f-4780-8651-b0dde1a29516" />
 
 -----
 
