@@ -43,6 +43,30 @@ def load_categories():
     return None
 
 
+@st.cache_data(ttl=3600, show_spinner=False)  # Кешуємо курс на 1 годину
+def get_exchange_rates():
+    """Отримує актуальні курси валют відносно USD"""
+    default_rates = {
+        "USD": 1.0,
+        "UAH": 43.89,
+        "EUR": 0.852
+    }
+
+    try:
+        response = requests.get("https://open.er-api.com/v6/latest/USD", timeout=5)
+        if response.status_code == 200:
+            data = response.json()
+            return {
+                "USD": 1.0,
+                "UAH": round(data["rates"].get("UAH", default_rates["UAH"]), 2),
+                "EUR": round(data["rates"].get("EUR", default_rates["EUR"]), 4)
+            }
+    except Exception:
+        pass
+
+    return default_rates
+
+
 # РОЗМІТКА СТОРІНКИ
 spacer_left, col_main, spacer_right = st.columns([1, 8, 1])
 
@@ -163,14 +187,16 @@ with col_main:
         st.markdown("---")
         st.markdown("## 📊 Результати оцінки")
 
-        # ГОЛОВНА МЕТРИКА ЦІНИ
-        rates = {"USD": 1.0, "UAH": 39.5, "EUR": 0.92}
+        # ОТРИМУЄМО КУРСИ ОНЛАЙН
+        rates = get_exchange_rates()
 
         with st.container(border=True):
             col_curr, col_price, col_range = st.columns([1, 2, 2])
 
             with col_curr:
                 curr = st.radio("Оберіть валюту:", ["USD", "UAH", "EUR"], horizontal=False)
+                if curr != "USD":
+                    st.caption(f"Курс: 1 USD = {rates[curr]} {curr}")
 
             price_converted = st.session_state.pred_price * rates[curr]
             margin = price_converted * 0.05
@@ -303,7 +329,7 @@ with col_main:
             except Exception:
                 pass
 
-                # ПОРІВНЯННЯ АВТО
+        # ПОРІВНЯННЯ АВТО
         st.write("")
         col_btn, _ = st.columns([1, 2])
         with col_btn:
