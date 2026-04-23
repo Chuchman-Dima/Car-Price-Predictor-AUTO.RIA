@@ -194,9 +194,11 @@ with col_main:
             col_curr, col_price, col_range = st.columns([1, 2, 2])
 
             with col_curr:
-                curr = st.radio("Оберіть валюту:", ["USD", "UAH", "EUR"], horizontal=False)
+                curr = st.radio("Оберіть валюту:", ["USD", "UAH", "EUR"], horizontal=False,
+                                key="currency_radio_selector")
+
                 if curr != "USD":
-                    st.caption(f"Курс: 1 USD = {rates[curr]} {curr}")
+                    st.caption(f"Курс: 1 USD = {rates[curr]:.2f} {curr}")
 
             price_converted = st.session_state.pred_price * rates[curr]
             margin = price_converted * 0.05
