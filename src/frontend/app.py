@@ -7,12 +7,12 @@ import altair as alt
 import matplotlib.pyplot as plt
 import time
 
-# --- НАЛАШТУВАННЯ СТОРІНКИ ---
+# НАЛАШТУВАННЯ СТОРІНКИ
 st.set_page_config(page_title="Прогноз ціни авто", page_icon="🚗", layout="wide")
 
 BACKEND_URL = os.getenv("BACKEND_URL", "http://localhost:8080")
 
-# --- ІНІЦІАЛІЗАЦІЯ СТАНУ ---
+# ІНІЦІАЛІЗАЦІЯ СТАНУ
 if "prediction_done" not in st.session_state:
     st.session_state.prediction_done = False
 if "pred_price" not in st.session_state:
@@ -43,8 +43,7 @@ def load_categories():
     return None
 
 
-# --- РОЗМІТКА СТОРІНКИ (80% ШИРИНИ) ---
-# Створюємо 3 колонки: пуста (10%), головна (80%), пуста (10%)
+# РОЗМІТКА СТОРІНКИ
 spacer_left, col_main, spacer_right = st.columns([1, 8, 1])
 
 with col_main:
@@ -62,7 +61,7 @@ with col_main:
     else:
         valid_categories = st.session_state.valid_categories
 
-    # --- РОЗПАКОВКА ДАНИХ ---
+    # РОЗПАКОВКА ДАНИХ
     valid_marks = valid_categories.get('valid_marks', [])
     valid_marks = [mark for mark in valid_marks if mark != 'Причеп']
     mark_model_mapping = valid_categories.get('mark_model_mapping', {})
@@ -74,7 +73,7 @@ with col_main:
     default_capacities = np.arange(1.0, 8.2, 0.2).round(1).tolist()
     default_gearboxes = ["Автомат", "Ручна / Механіка", "Робот", "Варіатор", "Тіптронік", "Редуктор"]
 
-    # --- ЗАГОЛОВОК ---
+    # ЗАГОЛОВОК
     st.markdown("<h1 style='text-align: center; color: #1E88E5;'>🚗 Калькулятор вартості авто</h1>",
                 unsafe_allow_html=True)
     st.markdown(
@@ -82,7 +81,7 @@ with col_main:
         unsafe_allow_html=True)
     st.write("")
 
-    # --- ІНТЕРФЕЙС ВВОДУ ---
+    # ІНТЕРФЕЙС ВВОДУ
     with st.container(border=True):
         st.subheader("📋 Характеристики автомобіля")
 
@@ -112,7 +111,7 @@ with col_main:
 
     st.write("")
 
-    # Кнопка розрахунку по центру
+    # Кнопка розрахунку
     _, btn_col, _ = st.columns([1, 2, 1])
     with btn_col:
         calculate_btn = st.button("🚀 Розрахувати орієнтовну ціну", use_container_width=True, type="primary")
@@ -159,12 +158,12 @@ with col_main:
             except Exception as e:
                 st.error(f"Помилка з'єднання: {e}")
 
-    # --- ВІДОБРАЖЕННЯ РЕЗУЛЬТАТІВ ---
+    # ВІДОБРАЖЕННЯ РЕЗУЛЬТАТІВ
     if st.session_state.prediction_done:
         st.markdown("---")
         st.markdown("## 📊 Результати оцінки")
 
-        # 1. ГОЛОВНА МЕТРИКА ЦІНИ
+        # ГОЛОВНА МЕТРИКА ЦІНИ
         rates = {"USD": 1.0, "UAH": 39.5, "EUR": 0.92}
 
         with st.container(border=True):
@@ -195,7 +194,7 @@ with col_main:
                 icon="⚠️"
             )
 
-        # 2. ПОЯСНЕННЯ ЦІНИ (SHAP)
+        # ПОЯСНЕННЯ ЦІНИ
         with st.expander("🔍 Як ШІ розрахував цю ціну? (Вплив характеристик)"):
             st.write("На графіку показано, як кожна характеристика збільшує або зменшує базову вартість:")
             df_shap = pd.DataFrame(list(st.session_state.shap_data.items()), columns=['Характеристика', 'Вплив ($)'])
@@ -221,7 +220,7 @@ with col_main:
         st.write("")
         st.subheader("💡 Інструменти покупця")
 
-        # 3. АНАЛІЗАТОР ТА ВИТРАТИ
+        # АНАЛІЗАТОР ТА ВИТРАТИ
         col_tools1, col_tools2 = st.columns(2)
 
         with col_tools1:
@@ -264,7 +263,7 @@ with col_main:
                     st.success(
                         "🔋 **Електромобіль:** Витрати на зарядку значно нижчі і залежать від тарифу (вдома чи на швидкісних станціях).")
 
-        # 4. ГРАФІК ЗНЕЦІНЕННЯ
+        # ГРАФІК ЗНЕЦІНЕННЯ
         with st.container(border=True):
             st.markdown(f"#### 📉 Прогноз знецінення авто (при {annual_mileage} тис. км/рік)")
             depreciation_payload = {
@@ -304,7 +303,7 @@ with col_main:
             except Exception:
                 pass
 
-                # 5. ПОРІВНЯННЯ АВТО
+                # ПОРІВНЯННЯ АВТО
         st.write("")
         col_btn, _ = st.columns([1, 2])
         with col_btn:
